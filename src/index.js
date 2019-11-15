@@ -32,8 +32,7 @@ appContainer.appendChild(vizContainer);
     // Code was sourced from https://datamaps.github.io/ and https://github.com/d3/d3
     var dataset = {};
     // We need to colorize every country based on "death rate"
-    // colors should be uniq for every value.
-    // For this purpose we create palette(using min/max series-value)
+    // Created color palette(using min/max series-value)
     var meanDeathRates = parsed.data.map( function (obj) 
         { 
           return obj.mean; 
