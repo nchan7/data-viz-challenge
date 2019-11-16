@@ -42,17 +42,16 @@ appContainer.appendChild(vizContainer);
     var minMeanDeathRate = sortedMeanDeathRates[0];
     var maxMeanDeathRate = sortedMeanDeathRates[sortedMeanDeathRates.length-2];
 
-    // create color palette function
+    // Create color palette function
     var paletteScale = d3.scale.linear()
             .domain([minMeanDeathRate,maxMeanDeathRate])
-            .range(["#EFEFFF","#02386F"]); // blue color
-    // fill dataset in appropriate format
+            .range(["#EFEFFF","#02386F"]);
     
-    // match countries with country codes
+    // Fill dataset in appropriate format
+    // Match countries with country codes
     var countries = Datamap.prototype.worldTopo.objects.world.geometries;
     
-    parsed.data.forEach(function(item){ //
-        // item example value ["USA", 70]
+    parsed.data.forEach(function(item){
         for (var i = 0; i < countries.length; i++) {
           if (item.location === countries[i].properties.name) {
             var iso = countries[i].id
@@ -63,27 +62,22 @@ appContainer.appendChild(vizContainer);
     });
 
     console.log(dataset)
-    // render map
+    
+    // Render map
     new Datamap({
         element: document.getElementById('container'),
-        projection: 'mercator', // big world map
-        // countries don't listed in dataset will be painted with this color
+        projection: 'mercator',
         fills: { defaultFill: '#F5F5F5' },
         data: dataset,
         geographyConfig: {
             borderColor: '#DEDEDE',
             highlightBorderWidth: 2,
-            // don't change color on mouse hover
             highlightFillColor: function(geo) {
                 return geo['fillColor'] || '#F5F5F5';
             },
-            // only change border
             highlightBorderColor: '#B7B7B7',
-            // show desired information in tooltip
             popupTemplate: function(geo, data) {
-                // don't show tooltip if country don't present in dataset
                 if (!data) { return ; }
-                // tooltip content
                 return ['<div class="hoverinfo">',
                     '<strong>', geo.properties.name, '</strong>',
                     '<br>Average Death Rate: <strong>', Math.round(10*data.meanDeathRate)/10, '</strong>',
