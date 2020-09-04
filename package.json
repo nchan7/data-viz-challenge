@@ -16,7 +16,7 @@
   "dependencies": {
     "datamaps": "^0.5.9",
     "express": "^4.17.1",
-    "papaparse": "^4.6.3"
+    "papaparse": "^5.2.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0"
